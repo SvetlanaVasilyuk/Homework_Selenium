@@ -19,7 +19,7 @@ public class YandexTest {
     private WebDriver webDriver;
 
     @BeforeClass
-    public void downloadDriver(){
+    public void downloadDriver() {
         WebDriverManager.chromedriver().setup();
     }
 
@@ -32,16 +32,18 @@ public class YandexTest {
     public void testSite() throws InterruptedException {
         webDriver.get("https://savkk.github.io/selenium-practice/button/");
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        WebElement buttonClickMe = webDriver.findElement(By.id("first"));
-        buttonClickMe.click();
+
+        webDriver.findElement(By.id("first")).click();
         List<WebElement> text1 = webDriver.findElements(By.id("result"));
         Assert.assertEquals(text1.get(1).getText(), "Excellent!");
         WebElement buttonClickMeToo = webDriver.findElement(By.className("button-primary"));
         Assert.assertTrue(buttonClickMeToo.isDisplayed());
+
         buttonClickMeToo.click();
         WebElement link1 = webDriver.findElement(By.linkText("Great! Return to menu"));
         Assert.assertTrue(link1.isDisplayed());
         link1.click();
+
         webDriver.findElement(By.id("checkbox")).click();
         WebElement checkbox1 = webDriver.findElement(By.id("one"));
         checkbox1.click();
@@ -51,6 +53,7 @@ public class YandexTest {
         WebElement checkboxResult = webDriver.findElement(By.id("result"));
         String expResult = checkbox1.getAttribute("value") + " " + checkbox2.getAttribute("value");
         Assert.assertEquals(checkboxResult.getText(), expResult);
+
         WebElement radio = webDriver.findElement(By.id("radio_two"));
         radio.click();
         webDriver.findElement(By.id("radio_go")).click();
