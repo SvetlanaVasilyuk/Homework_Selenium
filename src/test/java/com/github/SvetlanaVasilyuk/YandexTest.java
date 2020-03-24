@@ -1,4 +1,4 @@
-package test.java.com.github.SvetlanaVasilyuk;
+package com.github.SvetlanaVasilyuk;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -29,7 +29,7 @@ public class YandexTest {
     }
 
     @Test
-    public void testSite() throws InterruptedException {
+    public void testSite(){
         webDriver.get("https://savkk.github.io/selenium-practice/button/");
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 

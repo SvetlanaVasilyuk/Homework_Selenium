@@ -11,7 +11,7 @@
             <package name="com.github.SvetlanaVasilyuk"/>
         </packages>-->
         <classes>
-            <class name="test.java.com.github.SvetlanaVasilyuk.YandexTest"/>
+            <class name="com.github.SvetlanaVasilyuk.YandexTest"/>
         </classes>
     </test>
 
