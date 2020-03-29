@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class SiteTest {
+public class Homework_16_SiteTest1 {
 
     private WebDriver webDriver;
 

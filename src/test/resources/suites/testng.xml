@@ -11,7 +11,7 @@
             <package name="com.github.SvetlanaVasilyuk"/>
         </packages>-->
         <classes>
-            <class name="com.github.SvetlanaVasilyuk.SiteTest"/>
+            <class name="com.github.SvetlanaVasilyuk.Homework_17_SiteTest2"/>
         </classes>
     </test>
 
