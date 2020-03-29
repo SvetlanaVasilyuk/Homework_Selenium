@@ -35,7 +35,7 @@ public class Homework_17_SiteTest2 {
 
         selectValues("hero", "Alan Mathison Turing");
         selectValues("languages", "Java", "C++", "Golang");
-        webDriver.findElement(By.id("go")).click();
+        clickButton("go");
         Assert.assertEquals("Alan Mathison Turing", getSelectResult("hero"));
         Assert.assertEquals("Java, C++, Golang", getSelectResult("languages"));
         checkLink("Great! Return to menu");
@@ -59,7 +59,7 @@ public class Homework_17_SiteTest2 {
         String code = getCode();
         webDriver.switchTo().defaultContent();
         fillTextInput("Enter code:", code);
-        clickButton("Verify");
+        clickInputButton("Verify");
         checkLink("Great! Return to menu");
         clickLink("Great! Return to menu");
     }
@@ -70,6 +70,11 @@ public class Homework_17_SiteTest2 {
         for (String i : values) {
             selectField.selectByVisibleText(i);
         }
+    }
+
+    public void clickButton(String id) {
+        WebElement button = webDriver.findElement(By.id(id));
+        button.click();
     }
 
     public String getSelectResult(String selectName) {
@@ -121,7 +126,7 @@ public class Homework_17_SiteTest2 {
         return codeString.substring(14);
     }
 
-    public void clickButton(String buttonValue) {
+    public void clickInputButton(String buttonValue) {
         WebElement button = webDriver.findElement(By.xpath("//input[@type=\"button\" and @value=\"" + buttonValue + "\"]"));
         button.click();
     }
