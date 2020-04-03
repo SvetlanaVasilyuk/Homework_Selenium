@@ -26,12 +26,12 @@ public class Homework_16_SiteTest1 {
     @BeforeMethod
     public void initDriver() {
         webDriver = new ChromeDriver();
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Test
     public void testSite(){
         webDriver.get("https://savkk.github.io/selenium-practice/button/");
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
         webDriver.findElement(By.id("first")).click();
         List<WebElement> text1 = webDriver.findElements(By.id("result"));
@@ -43,6 +43,8 @@ public class Homework_16_SiteTest1 {
         WebElement link1 = webDriver.findElement(By.linkText("Great! Return to menu"));
         Assert.assertTrue(link1.isDisplayed());
         link1.click();
+
+        Assert.assertEquals(webDriver.manage().getCookieNamed("button").getValue(), "done");
 
         webDriver.findElement(By.id("checkbox")).click();
         WebElement checkbox1 = webDriver.findElement(By.id("one"));
@@ -62,6 +64,8 @@ public class Homework_16_SiteTest1 {
         WebElement link2 = webDriver.findElement(By.linkText("Great! Return to menu"));
         Assert.assertTrue(link2.isDisplayed());
         link2.click();
+
+        Assert.assertEquals(webDriver.manage().getCookieNamed("checkboxes").getValue(), "done");
     }
 
     @AfterMethod

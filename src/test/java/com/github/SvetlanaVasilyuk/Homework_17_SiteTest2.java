@@ -12,11 +12,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Homework_17_SiteTest2 {
-    private WebDriver webDriver;
+public class Homework_17_SiteTest2 extends SiteTest{
 
     @BeforeClass
     public void downloadDriver() {
@@ -26,20 +24,21 @@ public class Homework_17_SiteTest2 {
     @BeforeMethod
     public void initDriver() {
         webDriver = new ChromeDriver();
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @Test
     public void testSite() {
         webDriver.get("https://savkk.github.io/selenium-practice/select/");
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         selectValues("hero", "Alan Mathison Turing");
         selectValues("languages", "Java", "C++", "Golang");
-        clickButton("go");
+        clickButtonById("go");
         Assert.assertEquals("Alan Mathison Turing", getSelectResult("hero"));
         Assert.assertEquals("Java, C++, Golang", getSelectResult("languages"));
-        checkLink("Great! Return to menu");
         clickLink("Great! Return to menu");
+
+        Assert.assertEquals(webDriver.manage().getCookieNamed("select").getValue(), "done");
 
         clickLink("Form");
         fillTextInput("First Name:", "John");
@@ -51,8 +50,9 @@ public class Homework_17_SiteTest2 {
         String projectDirectory = System.getProperty("user.dir");
         uploadFile("Avatar:", projectDirectory + "/src/test/resources/images/picture1.png");
         clickSubmitButton();
-        checkLink("Great! Return to menu");
         clickLink("Great! Return to menu");
+
+        Assert.assertEquals(webDriver.manage().getCookieNamed("form").getValue(), "done");
 
         clickLink("IFrame");
         switchToFrame("code-frame");
@@ -60,8 +60,9 @@ public class Homework_17_SiteTest2 {
         webDriver.switchTo().defaultContent();
         fillTextInput("Enter code:", code);
         clickInputButton("Verify");
-        checkLink("Great! Return to menu");
         clickLink("Great! Return to menu");
+
+        Assert.assertEquals(webDriver.manage().getCookieNamed("iframe").getValue(), "done");
     }
 
     public void selectValues(String selectName, String... values) {
@@ -72,29 +73,15 @@ public class Homework_17_SiteTest2 {
         }
     }
 
-    public void clickButton(String id) {
-        WebElement button = webDriver.findElement(By.id(id));
-        button.click();
-    }
-
     public String getSelectResult(String selectName) {
         return webDriver.findElement(By.xpath("//select[@name=\"" + selectName + "\"]/following::label[@name=\"result\"]")).getText();
     }
 
-    public void checkLink(String linkText) {
-        WebElement link = webDriver.findElement(By.linkText(linkText));
-        Assert.assertTrue(link.isDisplayed());
-    }
-
-    public void clickLink(String linkText) {
-        WebElement link = webDriver.findElement(By.linkText(linkText));
-        link.click();
-    }
-
-    public void fillTextInput(String fieldName, String value) {
+    //Метод ниже определен в родительском классе SiteTest
+    /*public void fillTextInput(String fieldName, String value) {
         WebElement field = webDriver.findElement(By.xpath("//label[.=\"" + fieldName + "\"]/following::input[1]"));
         field.sendKeys(value);
-    }
+    }*/
 
     public void fillTextArea(String fieldName, String value) {
         WebElement field = webDriver.findElement(By.xpath("//label[.=\"" + fieldName + "\"]/following::textarea[1]"));
@@ -109,11 +96,6 @@ public class Homework_17_SiteTest2 {
     public void uploadFile(String fieldName, String filePath) {
         WebElement field = webDriver.findElement(By.xpath("//label[.=\"" + fieldName + "\"]/following::input[1]"));
         field.sendKeys(filePath);
-    }
-
-    public void clickSubmitButton() {
-        WebElement button = webDriver.findElement(By.xpath("//input[@type=\"submit\"]"));
-        button.click();
     }
 
     public void switchToFrame(String frameId) {

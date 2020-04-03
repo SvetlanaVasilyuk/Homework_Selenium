@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Homework_18_SiteTest3 {
-    private WebDriver webDriver;
+public class Homework_18_SiteTest3 extends SiteTest {
 
     @BeforeClass
     public void downloadDriver() {
@@ -24,36 +23,39 @@ public class Homework_18_SiteTest3 {
     @BeforeMethod
     public void initDriver() {
         webDriver = new ChromeDriver();
+        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @Test
     public void testSitePositive() {
         webDriver.get("https://savkk.github.io/selenium-practice/alerts/");
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        clickButton("get");
+
+        clickButtonByClass("get");
         Alert alert = webDriver.switchTo().alert();
         String password = alert.getText().substring(15);
         alert.accept();
         webDriver.switchTo().defaultContent();
-        clickButton("set");
+        clickButtonByClass("set");
         Alert prompt = webDriver.switchTo().alert();
         prompt.sendKeys(password);
         prompt.accept();
         webDriver.switchTo().defaultContent();
         Assert.assertTrue(webDriver.findElement(By.xpath("//label[.=\"Great!\"]")).isDisplayed());
         Assert.assertTrue(webDriver.findElement(By.className("return")).isDisplayed());
-        clickButton("return");
+        clickButtonByClass("return");
         Alert confirm = webDriver.switchTo().alert();
         confirm.accept();
         webDriver.switchTo().defaultContent();
+
+        Assert.assertEquals(webDriver.manage().getCookieNamed("alerts").getValue(), "done");
     }
 
     @Test
     public void testSiteNegative() {
         webDriver.get("https://savkk.github.io/selenium-practice/alerts/");
-        webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
         String password = "falsePassword";
-        clickButton("set");
+        clickButtonByClass("set");
         Alert prompt = webDriver.switchTo().alert();
         prompt.sendKeys(password);
         prompt.accept();
@@ -79,7 +81,6 @@ public class Homework_18_SiteTest3 {
     @Test
     public void testSiteTable() {
         webDriver.get("https://savkk.github.io/selenium-practice/table/");
-        webDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         addRow("Magazzini Alimentari Riuniti", "Giovanni Rovelli", "Italy");
 
@@ -92,17 +93,14 @@ public class Homework_18_SiteTest3 {
         rowsAfterDelete.addAll(findRows("Magazzini Alimentari Riuniti", "Giovanni Rovelli", "Italy"));
         Assert.assertEquals(rowsAfterDelete.size(), 0);
 
-        checkLink("Great! Return to menu");
+        WebElement link = webDriver.findElement(By.linkText("Great! Return to menu"));
 
         addRow("Fabulous machines", "Anthony MacCorner", "USA");
 
-        clickLink("Great! Return to menu");
+        link.click();
 
-    }
+        Assert.assertEquals(webDriver.manage().getCookieNamed("table").getValue(), "done");
 
-    public void clickButton(String buttonClass) {
-        WebElement button = webDriver.findElement(By.className(buttonClass));
-        button.click();
     }
 
     public boolean elementExists(String element) {
@@ -131,11 +129,6 @@ public class Homework_18_SiteTest3 {
         webDriver.findElement(By.xpath("//input[@value=\"Delete\"]")).click();
     }
 
-    public void fillTextInput(String fieldName, String value) {
-        WebElement field = webDriver.findElement(By.xpath("//label[.=\"" + fieldName + "\"]/following::input[1]"));
-        field.sendKeys(value);
-    }
-
     public void addRow(String company, String contact, String country) {
         int sizeBeforeAddition = findRows(company, contact, country).size();
         fillTextInput("Company", company);
@@ -144,16 +137,6 @@ public class Homework_18_SiteTest3 {
         webDriver.findElement(By.xpath("//input[@value=\"Add\"]")).click();
         int sizeAfterAddition = findRows(company, contact, country).size();
         Assert.assertEquals(sizeAfterAddition - sizeBeforeAddition, 1);
-    }
-
-    public void checkLink(String linkText) {
-        WebElement link = webDriver.findElement(By.linkText(linkText));
-        Assert.assertTrue(link.isDisplayed());
-    }
-
-    public void clickLink(String linkText) {
-        WebElement link = webDriver.findElement(By.linkText(linkText));
-        link.click();
     }
 
     @AfterMethod
