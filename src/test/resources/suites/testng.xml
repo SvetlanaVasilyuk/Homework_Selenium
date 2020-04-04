@@ -11,10 +11,11 @@
             <package name="com.github.SvetlanaVasilyuk"/>
         </packages>-->
         <classes>
-            <class name="com.github.SvetlanaVasilyuk.Homework_16_SiteTest1"/>
+            <!-- <class name="com.github.SvetlanaVasilyuk.Homework_16_SiteTest1"/>
             <class name="com.github.SvetlanaVasilyuk.Homework_17_SiteTest2"/>
             <class name="com.github.SvetlanaVasilyuk.Homework_18_SiteTest3"/>
-            <!-- <class name="com.github.SvetlanaVasilyuk.Homework_19_SiteTest4"/>-->
+            <class name="com.github.SvetlanaVasilyuk.Homework_19_SiteTest4"/>-->
+            <class name="com.github.SvetlanaVasilyuk.Homework_20_PageObject.Test_Homework_20"/>
         </classes>
     </test>
 
