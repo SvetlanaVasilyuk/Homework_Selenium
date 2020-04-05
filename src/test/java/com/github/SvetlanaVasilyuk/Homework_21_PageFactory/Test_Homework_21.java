@@ -1,4 +1,4 @@
-package com.github.SvetlanaVasilyuk.Homework_20_PageObject;
+package com.github.SvetlanaVasilyuk.Homework_21_PageFactory;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-public class Test_Homework_20 {
+public class Test_Homework_21 {
     private WebDriver webDriver;
 
     @BeforeClass
@@ -36,9 +36,11 @@ public class Test_Homework_20 {
         WelcomePage welcomePage = new WelcomePage(webDriver);
         welcomePage.getMenuBlock().selectSection("Обзор");
         OverviewPage overviewPage = new OverviewPage(webDriver);
-        String finances = overviewPage.getFinances();
+        String financesTitle = overviewPage.getFinanceBlockTitle();
+        Assert.assertEquals(financesTitle, "Финансовая свобода");
+        String financesAmount = overviewPage.getFinances();
         Pattern pattern = Pattern.compile("^(([1-9](\\d{0,2})( \\d{3}){0,2})|0)\\.\\d{2} ₽$");
-        Assert.assertTrue(pattern.matcher(finances).matches());
+        Assert.assertTrue(pattern.matcher(financesAmount).matches());
         String myFinances = overviewPage.getFinancesInfo();
         pattern = Pattern.compile("^Моих средств (([1-9](\\d{0,2})( \\d{3}){0,2})|0)\\.\\d{2} ₽$");
         Assert.assertTrue(pattern.matcher(myFinances).matches());
