@@ -1,6 +1,5 @@
 package com.github.SvetlanaVasilyuk.Homework_21_PageFactory;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,11 +22,16 @@ public class LoginPage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public void login(String username, String password) {
+    public static LoginPage open(WebDriver webDriver) {
+        return new LoginPage(webDriver);
+    }
+
+    public OTPPage login(String username, String password) {
         usernameInput.clear();
         usernameInput.sendKeys(username);
         passwordInput.clear();
         passwordInput.sendKeys(password);
         loginButton.click();
+        return OTPPage.open(webDriver);
     }
 }

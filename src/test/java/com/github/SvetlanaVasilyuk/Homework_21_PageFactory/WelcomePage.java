@@ -9,4 +9,8 @@ public class WelcomePage extends BasePage {
         super(webDriver);
         new WebDriverWait(webDriver, 15).until(ExpectedConditions.titleContains("Старт"));
     }
+
+    public static WelcomePage open(WebDriver webDriver) {
+        return new WelcomePage(webDriver);
+    }
 }

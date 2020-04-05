@@ -1,6 +1,5 @@
 package com.github.SvetlanaVasilyuk.Homework_21_PageFactory;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,9 +19,14 @@ public class OTPPage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public void enterOTP(String otp) {
+    public static OTPPage open(WebDriver webDriver) {
+        return new OTPPage(webDriver);
+    }
+
+    public WelcomePage enterOTP(String otp) {
         codeInput.clear();
         codeInput.sendKeys(otp);
         loginButton.click();
+        return WelcomePage.open(webDriver);
     }
 }

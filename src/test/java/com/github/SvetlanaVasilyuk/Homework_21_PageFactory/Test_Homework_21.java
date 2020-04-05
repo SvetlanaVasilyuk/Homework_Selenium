@@ -29,13 +29,13 @@ public class Test_Homework_21 {
 
     @Test
     public void testCheckFinances() {
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.login("demo", "demo");
-        OTPPage otpPage = new OTPPage(webDriver);
-        otpPage.enterOTP("0000");
-        WelcomePage welcomePage = new WelcomePage(webDriver);
-        welcomePage.getMenuBlock().selectSection("Обзор");
-        OverviewPage overviewPage = new OverviewPage(webDriver);
+        LoginPage
+                .open(webDriver)
+                .login("demo", "demo")
+                .enterOTP("0000")
+                .getMenuBlock()
+                .selectSection("Обзор");
+        OverviewPage overviewPage = OverviewPage.open(webDriver);
         String financesTitle = overviewPage.getFinanceBlockTitle();
         Assert.assertEquals(financesTitle, "Финансовая свобода");
         String financesAmount = overviewPage.getFinances();

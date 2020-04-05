@@ -14,6 +14,5 @@ public class MenuBlock {
     public void selectSection(String sectionName) {
         WebElement section = webDriver.findElement(By.xpath("//a[text()=\"" + sectionName + "\"]"));
         section.click();
-
     }
 }
