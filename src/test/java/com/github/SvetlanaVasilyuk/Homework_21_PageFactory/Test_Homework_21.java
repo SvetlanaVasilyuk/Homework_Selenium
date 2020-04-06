@@ -33,7 +33,6 @@ public class Test_Homework_21 {
                 .open(webDriver)
                 .login("demo", "demo")
                 .enterOTP("0000")
-                .getMenuBlock()
                 .selectSection("Обзор");
         OverviewPage overviewPage = OverviewPage.open(webDriver);
         String financesTitle = overviewPage.getFinanceBlockTitle();
