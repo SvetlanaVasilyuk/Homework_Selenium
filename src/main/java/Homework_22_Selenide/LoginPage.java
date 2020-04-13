@@ -1,6 +1,7 @@
 package Homework_22_Selenide;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selectors.byName;
@@ -16,6 +17,7 @@ public class LoginPage {
         return new LoginPage();
     }
 
+    @Step("Авторизация под пользователем {username}")
     public OTPPage login(String username, String password) {
         usernameInput.clear();
         usernameInput.setValue(username);

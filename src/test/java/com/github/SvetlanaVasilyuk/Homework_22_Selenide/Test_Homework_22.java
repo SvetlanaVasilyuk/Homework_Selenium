@@ -3,7 +3,9 @@ package com.github.SvetlanaVasilyuk.Homework_22_Selenide;
 import Homework_22_Selenide.LoginPage;
 import Homework_22_Selenide.OverviewPage;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.*;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,11 +15,15 @@ public class Test_Homework_22 {
 
     @BeforeMethod
     public void initDriver() {
-        Configuration.browser = "firefox";
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
         open("https://idemo.bspb.ru/");
     }
 
     @Test
+    @Owner(value = "Василюк Светлана")
+    @Severity(value = SeverityLevel.NORMAL)
+    @Flaky
+    @Description(value = "Тест проверяет информацию о финансовой свободе в личном кабинете")
     public void testCheckFinances() {
         LoginPage
                 .openPage()

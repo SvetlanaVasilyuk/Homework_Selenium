@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Product defects",
+    "matchedStatuses": "failed",
+    "messageRegex": ".*ElementShould.*"
+  },
+  {
+    "name": "Test defects",
+    "matchedStatuses": "broken",
+    "messageRegex": ".*NullPointerException.*"
+  }
+]
