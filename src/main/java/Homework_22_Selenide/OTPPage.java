@@ -1,7 +1,6 @@
 package Homework_22_Selenide;
 
 import com.codeborne.selenide.SelenideElement;
-import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.$;
@@ -15,7 +14,6 @@ public class OTPPage {
         return new OTPPage();
     }
 
-    @Step("Ввод одноразового пароля")
     public WelcomePage enterOTP(String otp) {
         codeInput.clear();
         codeInput.setValue(otp);

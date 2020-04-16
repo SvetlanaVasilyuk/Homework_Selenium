@@ -1,7 +1,6 @@
 package Homework_22_Selenide;
 
 import com.codeborne.selenide.SelenideElement;
-import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.byId;
@@ -13,17 +12,14 @@ public class OverviewPage extends BasePage {
     private SelenideElement financeAmount = financeBLock.$(By.className("amount"));
     private SelenideElement financeInfo = financeBLock.$(By.className("my-assets"));
 
-    @Step("Получение заголовка блока с финансами")
     public SelenideElement getFinanceTitle() {
         return financeTitle;
     }
 
-    @Step("Получение информации об объеме средств")
     public SelenideElement getFinanceAmount() {
         return financeAmount;
     }
 
-    @Step("Получение всплывающей информации о финансах")
     public SelenideElement getFinanceInfo() {
         financeTitle.hover();
         return financeInfo;
