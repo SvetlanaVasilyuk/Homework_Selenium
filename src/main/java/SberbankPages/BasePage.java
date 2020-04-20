@@ -1,5 +1,6 @@
 package SberbankPages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -11,15 +12,17 @@ public class BasePage {
     protected final ElementsCollection navBarItems;
     protected ElementsCollection subMenuItems;
     protected ElementsCollection tabItems;
+    protected SelenideElement header;
     protected SelenideElement cookieWarning;
 
     public BasePage() {
         this.navBarItems = $$(By.xpath("//ul[@class='lg-menu__list']/li"));
-        //this.subMenuItems = $$(By.xpath("//ul[@class='lg-menu__sub-list']/li"));
         this.tabItems = $$(By.xpath("//ul[@class='tabs-container__nav-tabs']/li"));
+        this.header = $(By.xpath("//div[@class='product-teaser-full-width__image product-teaser-full-width__image_md']//h2"));
         this.cookieWarning = $(By.xpath("//a[@class='cookie-warning__close']"));
     }
 
+    // Следующие 3 метода похожи друг на друга, но не полностью, поэтому не стала пытаться слить их в один
     public BasePage hoverSection(String sectionName) {
         boolean sectionFound = false;
         for (SelenideElement item : navBarItems) {
@@ -65,23 +68,15 @@ public class BasePage {
         }
     }
 
-    public void closeCookieWarning(){
+    public void closeCookieWarning() {
         cookieWarning.click();
     }
 
-
- /*   public void selectSection(ElementsCollection menu, String sectionName) {
-        boolean sectionFound = false;
-        for (SelenideElement item : menu) {
-            if (item.getText().equals(sectionName.toUpperCase())) {
-                item.hover();
-                sectionFound = true;
-                break;
-            }
-        }
-        if (!sectionFound) {
-            throw new IllegalArgumentException(String.format("Нет кнопки меню с текстом \"%s\"", sectionName));
-        }
+    public boolean cookieWarningAppears() {
+        return cookieWarning.is(Condition.exist);
     }
-*/
+
+    public SelenideElement getHeader() {
+        return header;
+    }
 }
