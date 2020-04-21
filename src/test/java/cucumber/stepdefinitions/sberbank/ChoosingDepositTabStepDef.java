@@ -1,6 +1,6 @@
-package cucumber.stepdefinitions.Sberbank;
+package cucumber.stepdefinitions.sberbank;
 
-import SberbankPages.ChoosingDepositTab;
+import pages.sberbank.ChoosingDepositTab;
 import com.codeborne.selenide.*;
 import io.cucumber.java.ru.Допустим;
 import org.testng.Assert;
@@ -22,11 +22,10 @@ public class ChoosingDepositTabStepDef {
         Assert.assertEquals(checkboxes.size(), dataTable.size());
 
         for (Map.Entry<String, SelenideElement> ch : checkboxes.entrySet()) {
-            String str = checkboxes.keySet().toString();
             if (dataTable.contains(ch.getKey())) {
-                ch.getValue().should(Condition.exist); // через visible почему-то не находит
+                ch.getValue().should(Condition.exist);
             } else {
-                ch.getValue().shouldNotBe(Condition.exist); // через visible почему-то не находит
+                ch.getValue().shouldNotBe(Condition.exist);
             }
         }
     }
@@ -65,11 +64,9 @@ public class ChoosingDepositTabStepDef {
     @Допустим("пользователь нажимает кнопку Подробнее вклада {string}")
     public void viewDepositDetails(String string) {
         SelenideElement deposit =
-                tab
-                        .getDeposits()
+                tab.getDeposits()
                         .find(Condition.matchesText(string));
-        tab
-                .detailButton(deposit)
+        tab.detailButton(deposit)
                 .click();
     }
 }

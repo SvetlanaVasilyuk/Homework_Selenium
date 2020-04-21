@@ -1,6 +1,6 @@
-package cucumber.stepdefinitions.Sberbank;
+package cucumber.stepdefinitions.sberbank;
 
-import SberbankPages.*;
+import pages.sberbank.BasePage;
 import com.codeborne.selenide.*;
 import io.cucumber.java.ru.Допустим;
 
@@ -31,12 +31,8 @@ public class BasePageStepDef {
     }
 
     @Допустим("отображается заголовок {string}")
-    public void headerIsDiplayed(String string) {
-        page
-                .getHeader()
-                .should(Condition.exist);
-
-        // Элемент находится, но по какой-то причине не видим и не заполнен
-        // .shouldHave(Condition.matchesText(string));
+    public void headerIsDisplayed(String string) {
+        page.getHeader()
+                .shouldHave(Condition.matchesText(string));
     }
 }

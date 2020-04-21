@@ -1,4 +1,4 @@
-package SberbankPages;
+package pages.sberbank;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -9,18 +9,11 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class BasePage {
-    protected final ElementsCollection navBarItems;
+    protected final ElementsCollection navBarItems = $$(By.xpath("//ul[@class='lg-menu__list']/li"));
     protected ElementsCollection subMenuItems;
-    protected ElementsCollection tabItems;
-    protected SelenideElement header;
-    protected SelenideElement cookieWarning;
-
-    public BasePage() {
-        this.navBarItems = $$(By.xpath("//ul[@class='lg-menu__list']/li"));
-        this.tabItems = $$(By.xpath("//ul[@class='tabs-container__nav-tabs']/li"));
-        this.header = $(By.xpath("//div[@class='product-teaser-full-width__image product-teaser-full-width__image_md']//h2"));
-        this.cookieWarning = $(By.xpath("//a[@class='cookie-warning__close']"));
-    }
+    protected ElementsCollection tabItems = $$(By.xpath("//ul[@class='tabs-container__nav-tabs']/li"));
+    protected SelenideElement header = $$(By.xpath("//h2[@class='kit-heading kit-heading_l product-teaser-full-width__header']")).findBy(Condition.visible);
+    protected SelenideElement cookieWarning = $(By.xpath("//a[@class='cookie-warning__close']"));
 
     // Следующие 3 метода похожи друг на друга, но не полностью, поэтому не стала пытаться слить их в один
     public BasePage hoverSection(String sectionName) {
@@ -29,7 +22,7 @@ public class BasePage {
             if (item.getText().equals(sectionName.toUpperCase())) {
                 item.click();
                 sectionFound = true;
-                this.subMenuItems = item.$$(By.xpath(".//ul[@class='lg-menu__sub-list']/li/a"));
+                subMenuItems = item.$$(By.xpath(".//ul[@class='lg-menu__sub-list']/li/a"));
                 break;
             }
         }
