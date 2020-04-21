@@ -13,16 +13,15 @@ public class BasePage {
     protected SelenideElement button;
     protected SelenideElement modalCloser = $(By.xpath("//div[@class='PromoPopupHoliday__buttons']//a[.='Понятно, спасибо']"));
 
-//    public BasePage() {
-//        this.list = $$(By.ByClassName("ListingPopularMMM-module__item"));
-//    }
-
-    public String getSalesCountInList(String item){
-        return list.findBy(Condition.exactText(item)).sibling(0).getText();
-    }
-
     public ElementsCollection getItemList(){
         return list;
+    }
+
+    public SelenideElement getListItemCount(String itemName){
+        SelenideElement listItemCount =
+                list.find(Condition.exactText(itemName))
+                    .sibling(0);
+        return listItemCount;
     }
 
     public SelenideElement getButton(){
@@ -33,8 +32,7 @@ public class BasePage {
         modalCloser.click();
     }
 
-    public boolean modalAppears() throws InterruptedException {
-        //Thread.sleep(3000);
+    public boolean modalAppears() {
         return modalCloser.is(Condition.exist);
     }
 

@@ -5,16 +5,13 @@ import AutoruPages.ModelSalesPage;
 import AutoruPages.WelcomePage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
+import data.DataStorage;
 import io.cucumber.java.ru.Допустим;
 import org.testng.Assert;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class BasePageStepDef {
     private BasePage welcomePage = new WelcomePage();
     private BasePage modelSalesPage = new ModelSalesPage();
-    private int listCount;
 
     @Допустим("открывается страница авто.ру {string}")
     public void открываетсяСтраницаАвтоРу(String string) throws InterruptedException {
@@ -26,13 +23,8 @@ public class BasePageStepDef {
 
     @Допустим("^в списке марок отображается количество объявлений по марке (.*)$")
     public void checkMarkListCount(String string) {
-            String listCountStr =
-                    welcomePage
-                        .getItemList()
-                        .find(Condition.exactText(string))
-                        .sibling(0)
-                        .getText();
-        listCount = Integer.parseInt(listCountStr);
+        String listCountStr = welcomePage.getListItemCount(string).getText();
+        DataStorage.setValue("listCount", Integer.parseInt(listCountStr));
     }
 
     @Допустим("^пользователь переходит на страницу с объявлениями по марке (.*)$")
@@ -51,18 +43,13 @@ public class BasePageStepDef {
                 .getText();
         String str  = buttonText.replaceAll("[^0-9]+", "");
         int buttonCount = Integer.parseInt(str);
-        Assert.assertEquals(buttonCount, listCount);
+        Assert.assertEquals(buttonCount, DataStorage.getValue("listCount"));
     }
 
     @Допустим("^в списке моделей отображается количество объявлений по модели (.*)$")
     public void checkModelListCount(String string) {
-        String listCountStr =
-                modelSalesPage
-                        .getItemList()
-                        .find(Condition.matchesText(string))
-                        .sibling(0)
-                        .getText();
-        listCount = Integer.parseInt(listCountStr);
+        String listCountStr = modelSalesPage.getListItemCount(string).getText();
+        DataStorage.setValue("listCount", Integer.parseInt(listCountStr));
     }
 
     @Допустим("^пользователь переходит на страницу с объявлениями по модели (.*)$")

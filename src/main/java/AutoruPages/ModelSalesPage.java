@@ -7,7 +7,6 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class ModelSalesPage extends BasePage {
     public ModelSalesPage() {
-        //this.list = $$(By.className("Link ListingPopularMMM-module__itemName"));
         this.list = $$(By.xpath("//div[@class='ListingPopularMMM-module__item']//a"));
         this.button = $(By.xpath("//div[@class='ListingCarsFilters-module__actions']//button"));
     }
