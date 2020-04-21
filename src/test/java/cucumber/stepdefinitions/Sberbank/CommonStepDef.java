@@ -1,4 +1,4 @@
-package cucumber.StepDefinitions.Sberbank;
+package cucumber.stepdefinitions.Sberbank;
 
 import com.codeborne.selenide.*;
 import io.cucumber.java.ru.Допустим;

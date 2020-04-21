@@ -1,4 +1,4 @@
-package cucumber.StepDefinitions.Sberbank;
+package cucumber.stepdefinitions.Sberbank;
 
 import SberbankPages.ChoosingDepositTab;
 import com.codeborne.selenide.*;

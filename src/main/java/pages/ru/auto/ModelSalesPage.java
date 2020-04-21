@@ -1,4 +1,4 @@
-package AutoruPages;
+package pages.ru.auto;
 
 import org.openqa.selenium.By;
 
