@@ -1,4 +1,4 @@
-package cucumber.stepdefinitions;
+package cucumber.stepdefinitions.site;
 
 import Homework_22_Selenide.LoginPage;
 import Homework_22_Selenide.OTPPage;

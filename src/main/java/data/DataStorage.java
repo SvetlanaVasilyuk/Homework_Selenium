@@ -1,24 +1,24 @@
 package data;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class DataStorage {
-    private static ThreadLocal<Map<String, Object>> storage = new ThreadLocal<>();
+    private static DataStorage instance;
+    private int count;
 
-    public static Object getValue(String key) {
-        init();
-        return storage.get().get(key);
+    private DataStorage() {
     }
 
-    public static void setValue(String key, Object value) {
-        init();
-        storage.get().put(key, value);
-    }
-
-    private static void init() {
-        if (storage.get() == null) {
-            storage.set(new HashMap<>());
+    public static synchronized DataStorage getInstance() {
+        if (instance == null) {
+            instance = new DataStorage();
         }
+        return instance;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

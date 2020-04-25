@@ -1,9 +1,9 @@
 package pages.sberbank;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -51,6 +51,7 @@ public class BasePage {
         boolean sectionFound = false;
         for (SelenideElement item : tabItems) {
             if (item.getText().equals(sectionName)) {
+                new WebDriverWait(WebDriverRunner.getWebDriver(), 10).until(ExpectedConditions.elementToBeClickable(item));
                 item.click();
                 sectionFound = true;
                 break;

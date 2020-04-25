@@ -6,10 +6,11 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class BasePage {
     protected ElementsCollection list;
-    protected SelenideElement button;
+    protected ElementsCollection buttons = $$(By.tagName("button"));
     protected SelenideElement modalCloser = $(By.xpath("//div[@class='PromoPopupHoliday__buttons']//a[.='Понятно, спасибо']"));
 
     public ElementsCollection getItemList() {
@@ -23,8 +24,8 @@ public class BasePage {
         return listItemCount;
     }
 
-    public SelenideElement getButton() {
-        return button;
+    public ElementsCollection getButtons() {
+        return buttons;
     }
 
     public void closeModal() {

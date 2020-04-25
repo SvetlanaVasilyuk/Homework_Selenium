@@ -26,7 +26,7 @@ public class BasePageStepDef {
         String listCountStr =
                 page.getListItemCount(string)
                         .getText();
-        DataStorage.setValue("listCount", Integer.parseInt(listCountStr));
+        DataStorage.getInstance().setCount(Integer.parseInt(listCountStr));
     }
 
     @Допустим("^пользователь переходит на страницу с объявлениями по (?:марке|модели) (.*)$")
@@ -37,13 +37,14 @@ public class BasePageStepDef {
         page = new ModelSalesPage();
     }
 
-    @Допустим("отображается то же количество объявлений на кнопке")
-    public void checkCountInButton() {
+    @Допустим("ожидается появление кнопки {string} с отображаемым количеством объявлений с погрешностью {int}")
+    public void checkCountInButton(String string, int error) {
         String buttonText =
-                page.getButton()
+                page.getButtons()
+                        .find(Condition.matchText(string))
                         .getText();
         String buttonCountText = buttonText.replaceAll("[^0-9]+", "");
         int buttonCount = Integer.parseInt(buttonCountText);
-        Assert.assertEquals(buttonCount, DataStorage.getValue("listCount"));
+        Assert.assertEquals(buttonCount, (int) DataStorage.getInstance().getCount(), error);
     }
 }

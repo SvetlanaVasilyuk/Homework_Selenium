@@ -5,9 +5,10 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         plugin = "json:target/cucumber-report",
-        features = "src/test/resources/feature/ru.auto",
+        features = "src/test/resources/feature",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
-        glue = {"cucumber.stepdefinitions.ru.auto"}
+        glue = {"cucumber.stepdefinitions"},
+        tags = "@all"
 )
 public class CucumberRunnerTest extends AbstractTestNGCucumberTests {
 }
