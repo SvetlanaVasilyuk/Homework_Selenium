@@ -11,13 +11,13 @@
             <package name="com.github.SvetlanaVasilyuk"/>
         </packages>-->
         <classes>
-            <!-- <class name="com.github.SvetlanaVasilyuk.Homework_16_SiteTest1"/>
-            <class name="com.github.SvetlanaVasilyuk.Homework_17_SiteTest2"/>
-            <class name="com.github.SvetlanaVasilyuk.Homework_18_SiteTest3"/>
-            <class name="com.github.SvetlanaVasilyuk.Homework_19_SiteTest4"/>
-            <class name="com.github.SvetlanaVasilyuk.Homework_20_PageObject.Test_Homework_20"/>
-            <class name="com.github.SvetlanaVasilyuk.Homework_21_PageFactory.Test_Homework_21"/>
-            <class name="com.github.SvetlanaVasilyuk.Homework_22_Selenide.Test_Homework_22"/>-->
+            <!-- <class name="com.github.SvetlanaVasilyuk.homework_16_19.Homework_16_SiteTest1"/>
+            <class name="com.github.SvetlanaVasilyuk.homework_16_19.Homework_17_SiteTest2"/>
+            <class name="com.github.SvetlanaVasilyuk.homework_16_19.Homework_18_SiteTest3"/>
+            <class name="com.github.SvetlanaVasilyuk.homework_16_19.Homework_19_SiteTest4"/>
+            <class name="com.github.SvetlanaVasilyuk.homework_20_pageobject.Test_Homework_20"/>
+            <class name="com.github.SvetlanaVasilyuk.homework_21_pagefactory.Test_Homework_21"/>
+            <class name="com.github.SvetlanaVasilyuk.pages.bspb.Test_Homework_22"/>-->
             <class name="cucumber.CucumberRunnerTest"/>
         </classes>
     </test>

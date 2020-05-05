@@ -13,10 +13,11 @@ public class BasePageStepDef {
         if (page.cookieWarningAppears()) {
             page.closeCookieWarning();
         }
+        WebDriverRunner.getWebDriver().manage().window().maximize();
     }
 
     @Допустим("пользователь переходит в раздел {string}")
-    public void openSection(String string) {
+    public void openSection(String string){
         page.hoverSection(string);
     }
 

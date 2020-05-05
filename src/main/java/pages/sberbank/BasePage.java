@@ -15,8 +15,7 @@ public class BasePage {
     protected SelenideElement header = $$(By.xpath("//h2[@class='kit-heading kit-heading_l product-teaser-full-width__header']")).findBy(Condition.visible);
     protected SelenideElement cookieWarning = $(By.xpath("//a[@class='cookie-warning__close']"));
 
-    // Следующие 3 метода похожи друг на друга, но не полностью, поэтому не стала пытаться слить их в один
-    public BasePage hoverSection(String sectionName) {
+    public BasePage hoverSection(String sectionName){
         boolean sectionFound = false;
         for (SelenideElement item : navBarItems) {
             if (item.getText().equals(sectionName.toUpperCase())) {

@@ -1,7 +1,6 @@
-package cucumber.stepdefinitions.sberbank;
+package cucumber.stepdefinitions.bspb;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.WebDriverRunner;
 import io.cucumber.java.Before;
 
 import java.io.File;
